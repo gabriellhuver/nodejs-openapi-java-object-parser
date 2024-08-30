@@ -1,6 +1,6 @@
 {
   "name": "java-to-openapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI tool to convert Java classes to OpenAPI 3 YAML.",
   "main": "src/index.js",
   "bin": {
@@ -13,6 +13,6 @@
     "start": "node bin/cli.js"
   },
   "keywords": ["openapi", "yaml", "java", "converter", "cli"],
-  "author": "Seu Nome",
+  "author": "Gabriell Huver",
   "license": "MIT"
 }
