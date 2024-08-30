@@ -1,0 +1,27 @@
+openapi: 3.0.0
+info:
+  title: API Documentation
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+    Produto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        preco:
+          type: number
+        emEstoque:
+          type: boolean
+        categoria:
+          $ref: '#/components/schemas/Categoria'
