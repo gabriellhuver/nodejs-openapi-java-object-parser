@@ -1,5 +1,18 @@
 {
+  "name": "java-to-openapi",
+  "version": "1.0.0",
+  "description": "A CLI tool to convert Java classes to OpenAPI 3 YAML.",
+  "main": "src/index.js",
+  "bin": {
+    "java-to-openapi": "./bin/cli.js"
+  },
   "dependencies": {
     "js-yaml": "^4.1.0"
-  }
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "keywords": ["openapi", "yaml", "java", "converter", "cli"],
+  "author": "Seu Nome",
+  "license": "MIT"
 }

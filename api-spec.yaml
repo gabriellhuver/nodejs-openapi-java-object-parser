@@ -25,3 +25,11 @@ components:
           type: boolean
         categoria:
           $ref: '#/components/schemas/Categoria'
+        tags:
+          type: array
+          items:
+            type: string
+        categoriasRelacionadas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Categoria'

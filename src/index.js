@@ -5,14 +5,12 @@ const yaml = require('js-yaml');
 function parseJavaClass(javaFilePath) {
     const classContent = fs.readFileSync(javaFilePath, 'utf8');
     
-    // Extrair o nome da classe
     const classNameMatch = classContent.match(/class\s+(\w+)/);
     const className = classNameMatch ? classNameMatch[1] : 'UnknownClass';
 
     const properties = [];
     const methods = [];
 
-    // Extrair campos (atributos)
     const propertyMatches = classContent.match(/private\s+([\w<>]+)\s+(\w+);/g);
     if (propertyMatches) {
         propertyMatches.forEach(prop => {
@@ -24,7 +22,6 @@ function parseJavaClass(javaFilePath) {
         });
     }
 
-    // Extrair métodos
     const methodMatches = classContent.match(/public\s+(\w+)\s+(\w+)\(.*\)\s*\{/g);
     if (methodMatches) {
         methodMatches.forEach(method => {
@@ -117,7 +114,7 @@ function mapJavaTypeToOpenApiType(javaType) {
         case 'double':
             return 'number';
         default:
-            return 'string'; // Padrão
+            return 'string';
     }
 }
 
@@ -150,12 +147,16 @@ function processJavaFilesInDirectory(directoryPath) {
     return parsedClasses;
 }
 
+function generateYamlFromDirectory(directoryPath, outputFilePath) {
+    const parsedClasses = processJavaFilesInDirectory(directoryPath);
+    const yamlContent = generateOpenApiYaml(parsedClasses);
+    fs.writeFileSync(outputFilePath, yamlContent);
+    console.log('YAML gerado com sucesso!');
+}
 
-
-const directoryPath = 'C:\\Users\\Ghaal\\Documents\\GitHub\\nodejs-openapi-java-object-parser\\src\\example'; // Substitua pelo caminho da sua pasta
-const parsedClasses = processJavaFilesInDirectory(directoryPath);
-const yamlContent = generateOpenApiYaml(parsedClasses);
-
-fs.writeFileSync('api-spec.yaml', yamlContent);
-
-console.log('YAML gerado com sucesso!');
+module.exports = {
+    parseJavaClass,
+    generateOpenApiYaml,
+    processJavaFilesInDirectory,
+    generateYamlFromDirectory
+};
