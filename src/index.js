@@ -13,10 +13,10 @@ function parseJavaClass(javaFilePath) {
     const methods = [];
 
     // Extrair campos (atributos)
-    const propertyMatches = classContent.match(/private\s+(\w+)\s+(\w+);/g);
+    const propertyMatches = classContent.match(/private\s+([\w<>]+)\s+(\w+);/g);
     if (propertyMatches) {
         propertyMatches.forEach(prop => {
-            const match = prop.match(/private\s+(\w+)\s+(\w+);/);
+            const match = prop.match(/private\s+([\w<>]+)\s+(\w+);/);
             properties.push({
                 type: match[1],
                 name: match[2]
@@ -65,13 +65,28 @@ function generateOpenApiYaml(parsedClasses) {
         parsedClass.properties.forEach(prop => {
             const propType = mapJavaTypeToOpenApiType(prop.type);
 
-            if (parsedClasses.find(cls => cls.className === prop.type)) {
-                // Se o tipo é uma classe mapeada, faça uma referência
+            if (propType === 'array') {
+                const itemType = extractListItemType(prop.type);
+                if (parsedClasses.find(cls => cls.className === itemType)) {
+                    schema.properties[prop.name] = {
+                        type: 'array',
+                        items: {
+                            $ref: `#/components/schemas/${itemType}`
+                        }
+                    };
+                } else {
+                    schema.properties[prop.name] = {
+                        type: 'array',
+                        items: {
+                            type: mapJavaTypeToOpenApiType(itemType)
+                        }
+                    };
+                }
+            } else if (parsedClasses.find(cls => cls.className === prop.type)) {
                 schema.properties[prop.name] = {
                     $ref: `#/components/schemas/${prop.type}`
                 };
             } else {
-                // Caso contrário, mapeie para um tipo simples
                 schema.properties[prop.name] = {
                     type: propType
                 };
@@ -85,6 +100,10 @@ function generateOpenApiYaml(parsedClasses) {
 }
 
 function mapJavaTypeToOpenApiType(javaType) {
+    if (javaType.startsWith('List<')) {
+        return 'array';
+    }
+    
     switch (javaType) {
         case 'int':
         case 'Integer':
@@ -100,6 +119,11 @@ function mapJavaTypeToOpenApiType(javaType) {
         default:
             return 'string'; // Padrão
     }
+}
+
+function extractListItemType(listType) {
+    const match = listType.match(/List<(\w+)>/);
+    return match ? match[1] : 'string';
 }
 
 function processJavaFilesInDirectory(directoryPath) {
