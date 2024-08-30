@@ -122,7 +122,7 @@ Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICEN
 
 ## Autor
 
-Desenvolvido por **Seu Nome**.
+Desenvolvido por **Gabriell Huver**.
 
 ---
 
