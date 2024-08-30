@@ -127,14 +127,30 @@ function extractListItemType(listType) {
 }
 
 function processJavaFilesInDirectory(directoryPath) {
-    const javaFiles = fs.readdirSync(directoryPath).filter(file => file.endsWith('.java'));
-    const parsedClasses = javaFiles.map(file => {
-        const filePath = path.join(directoryPath, file);
-        return parseJavaClass(filePath);
-    });
+    let javaFiles = [];
+
+    function readDirectoryRecursively(currentPath) {
+        const items = fs.readdirSync(currentPath);
+
+        items.forEach(item => {
+            const fullPath = path.join(currentPath, item);
+            const stat = fs.statSync(fullPath);
+
+            if (stat.isDirectory()) {
+                readDirectoryRecursively(fullPath);
+            } else if (stat.isFile() && fullPath.endsWith('.java')) {
+                javaFiles.push(fullPath);
+            }
+        });
+    }
+
+    readDirectoryRecursively(directoryPath);
     
+    const parsedClasses = javaFiles.map(file => parseJavaClass(file));
     return parsedClasses;
 }
+
+
 
 const directoryPath = 'C:\\Users\\Ghaal\\Documents\\GitHub\\nodejs-openapi-java-object-parser\\src\\example'; // Substitua pelo caminho da sua pasta
 const parsedClasses = processJavaFilesInDirectory(directoryPath);
