@@ -1,3 +1,6 @@
+
+[![Node.js Package](https://github.com/gabriellhuver/nodejs-openapi-java-object-parser/actions/workflows/npm-publish.yml/badge.svg?branch=main)](https://github.com/gabriellhuver/nodejs-openapi-java-object-parser/actions/workflows/npm-publish.yml)
+
 # Java-to-OpenAPI
 
 Java-to-OpenAPI is a command-line interface (CLI) tool that converts Java classes into OpenAPI 3 specifications in YAML format. This tool is useful for developers who want to automatically generate OpenAPI documentation from Java classes.
