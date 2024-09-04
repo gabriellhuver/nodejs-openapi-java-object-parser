@@ -1,61 +1,57 @@
-Aqui está um exemplo de README para sua ferramenta `java-to-openapi`:
-
----
-
 # Java-to-OpenAPI
 
-**Java-to-OpenAPI** é uma ferramenta de linha de comando (CLI) que converte classes Java em especificações OpenAPI 3 no formato YAML. Esta ferramenta é útil para desenvolvedores que desejam gerar automaticamente a documentação OpenAPI a partir de classes Java.
+Java-to-OpenAPI is a command-line interface (CLI) tool that converts Java classes into OpenAPI 3 specifications in YAML format. This tool is useful for developers who want to automatically generate OpenAPI documentation from Java classes.
 
-## Instalação
+## Installation
 
-Você pode usar o `java-to-openapi` diretamente com `npx`, sem a necessidade de instalação prévia:
-
-```bash
-npx java-to-openapi <source-directory> <output-file>
-```
-
-## Uso
-
-### Comando Básico
-
-Para usar a ferramenta, execute o comando:
+You can use java-to-openapi directly with npx, without the need for prior installation:
 
 ```bash
 npx java-to-openapi <source-directory> <output-file>
 ```
 
-- `<source-directory>`: O caminho para o diretório contendo os arquivos `.java`.
-- `<output-file>`: O caminho e nome do arquivo YAML de saída.
+## Usage
 
-### Exemplo
+### Basic Command
 
-Se você tem uma pasta `src/example` com suas classes Java e deseja gerar um arquivo `api-spec.yaml` na raiz do projeto, execute:
+To use the tool, run the command:
+
+```bash
+npx java-to-openapi <source-directory> <output-file>
+```
+
+- `<source-directory>`: The path to the directory containing the .java files.
+- `<output-file>`: The path and name of the output YAML file.
+
+### Example
+
+If you have a `src/example` folder with your Java classes and want to generate an `api-spec.yaml` file in the project root, run:
 
 ```bash
 npx java-to-openapi ./src/example ./api-spec.yaml
 ```
 
-### Estrutura de Arquivos
+## File Structure
 
-```bash
+```plaintext
 src/
 └── example/
     ├── Produto.java
     └── Categoria.java
 ```
 
-## Funcionalidades
+## Features
 
-- **Conversão de Classes Java**: Analisa classes Java e gera automaticamente a especificação OpenAPI 3 correspondente.
-- **Suporte a Tipos Primitivos**: Converte tipos Java comuns (`int`, `String`, `boolean`, etc.) para seus equivalentes OpenAPI.
-- **Suporte a Listas**: Identifica e converte listas (`List<T>`) para arrays no OpenAPI.
-- **Recursividade**: Processa arquivos `.java` em subdiretórios de forma recursiva.
+- **Java Class Conversion**: Analyzes Java classes and automatically generates the corresponding OpenAPI 3 specification.
+- **Primitive Type Support**: Converts common Java types (int, String, boolean, etc.) to their OpenAPI equivalents.
+- **List Support**: Identifies and converts lists (List<T>) to arrays in OpenAPI.
+- **Recursiveness**: Processes .java files in subdirectories recursively.
 
-## Exemplos de Classes Suportadas
+## Supported Class Examples
 
-A ferramenta suporta classes simples e complexas, incluindo aquelas que contêm listas ou referências a outras classes.
+The tool supports both simple and complex classes, including those containing lists or references to other classes.
 
-**Exemplo de Classe Java**:
+### Example Java Class:
 
 ```java
 import java.util.List;
@@ -69,11 +65,11 @@ public class Produto {
     private List<String> tags;
     private List<Categoria> categoriasRelacionadas;
 
-    // Getters e Setters omitidos para brevidade
+    // Getters and Setters omitted for brevity
 }
 ```
 
-**Saída YAML**:
+### YAML Output:
 
 ```yaml
 openapi: 3.0.0
@@ -112,18 +108,14 @@ components:
           type: string
 ```
 
-## Contribuindo
+## Contributing
 
-Se você encontrar bugs ou tiver sugestões para melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+If you find any bugs or have suggestions for improvements, feel free to open an issue or submit a pull request.
 
-## Licença
+## License
 
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-## Autor
+## Author
 
-Desenvolvido por **Gabriell Huver**.
-
----
-
-Este README fornece uma visão geral do que a ferramenta faz, como usá-la, e exemplos práticos para garantir que os usuários possam começar a usar a ferramenta rapidamente.
+Developed by Gabriell Huver.
