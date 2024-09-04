@@ -1,6 +1,6 @@
 {
   "name": "java-to-openapi",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A CLI tool to convert Java classes to OpenAPI 3 YAML.",
   "main": "src/index.js",
   "bin": {
